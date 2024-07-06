@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raccoon Store</title>
+    <link rel="icon" type="image/x-icon" href="icon-raccoon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Slabo+13px&family=Ultra&display=swap');
+
+        body {
+            background-image: url("background.png");
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            display: grid;
+            grid-template-rows: 25% 55% 20%;
+            grid-template-columns: 20% 60% 20%;
+            grid-template-areas:
+                "header header header"
+                "container container container"
+                "footer footer footer";
+        }
+
+        header {
+            background-color: rgb(39, 39, 39);
+            color: white;
+            grid-area: header;
+            position: fixed;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        header h1 {
+            align-self: center;
+            font-size: 40px;
+            font-weight: normal;
+            font-family: 'Ultra', Arial, Helvetica, sans-serif;
+        }
+
+        header img {
+            height: 125px;
+            width: auto;
+        }
+
+        #container {
+            grid-area: container;
+            display: grid;
+            grid-template-columns: 60% 40%;
+        }
+
+        #dados {
+            color: white;
+            grid-column: 2;
+            background-color: rgb(39, 39, 39);
+            padding: 10px;
+            border-radius: 20px;
+            line-height: 1pt;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: start;
+            line-height: 10pt;
+            margin-left: 125px;
+            width: 300px;
+        }
+
+        h3 {
+            font-family: 'Ultra', Arial, Helvetica, sans-serif;
+            font-weight: normal;
+        }
+
+        p {
+            font-family: 'Slabo 13px', Arial, Helvetica, sans-serif;
+        }
+
+        input {
+            border-radius: 5px;
+            border: 0;
+            font-size: 15px;
+        }
+
+        #captcha {
+            padding: 0px 20px 0px 30px;
+            height: 40px;
+            width: auto;
+        }
+
+        #button {
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 5px;
+            border: 0;
+        }
+
+        #button:hover {
+            color: white;
+            background-color: black;
+        }
+
+        footer {
+            background-color: rgb(39, 39, 39);
+            color: white;
+            column-gap: 50pt;
+            grid-area: footer;
+            position: block;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 75px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="logo.png" alt="Logo Raccoon Store">
+        <h1>Raccoon Store</h1>
+    </header>
+    <div id="container">
+        <div id="dados">
+            <form>
+                <h3>Login</h3>
+                <p>Usuário: </p>
+                <input type="text" required>
+                <p>Senha: </p>
+                <input type="password" required>
+                <p>Captcha: </p>
+                <p id="generator"></p>
+                <input type="text" id="captchu" required autocomplete="off">
+                <p id="mensagem"></p>
+            </form>
+            <p><button type="submit" id="button" onclick="enviar()">Entrar</button></p>
+        </div>
+    </div>
+    <footer>
+        <p>Entre em Contato Conosco</p>
+        <p>E-mail: raccoonstore@email.com</p>
+        <p>Telefone: (38)99999-9999</p>
+    </footer>
+    <script>
+        var geracao = Math.floor(Math.random() * 50000) + 10000;
+        let sobre = document.getElementById('generator')
+        sobre.innerHTML = geracao;
+        function enviar() {
+            var captchuInput = document.getElementById('captchu');
+            var code = parseInt(captchuInput.value);
+
+            if (code === geracao) {
+                document.getElementById("mensagem").innerHTML = ('O captcha está Correto');
+            }
+            else if (code != geracao) {
+                document.getElementById("mensagem").innerHTML = ('O captcha está Incorreto');
+            }
+        }
+    </script>
+</body>
+
+</html>
